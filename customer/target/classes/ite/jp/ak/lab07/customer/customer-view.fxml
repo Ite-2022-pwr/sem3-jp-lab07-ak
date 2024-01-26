@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ite.jp.ak.lab07.customer.CustomerController">
+   <children>
+      <TabPane fx:id="tabPane" layoutX="14.0" layoutY="131.0" prefHeight="658.0" prefWidth="1171.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="productsTab" text="Dostępne produkty">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="productsTableView" layoutX="14.0" layoutY="45.0" onMouseClicked="#onSelectedProductFromOffer" prefHeight="576.0" prefWidth="335.0">
+                          <columns>
+                            <TableColumn fx:id="productsNameTableColumn" prefWidth="241.0" text="Nazwa" />
+                              <TableColumn fx:id="productsQuantityTableColumn" prefWidth="93.0" text="Ilość" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="388.0" layoutY="30.0" text="Informacje">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="productNameLabel" layoutX="388.0" layoutY="77.0" text="Opis:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="388.0" layoutY="163.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="33.0" prefWidth="233.0" text="Dodaj do zamówienia">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#refreshOffer" prefHeight="33.0" prefWidth="106.0" text="Odśwież">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <TableView fx:id="cartTableView" layoutX="780.0" layoutY="60.0" prefHeight="310.0" prefWidth="335.0">
+                           <columns>
+                              <TableColumn fx:id="cartQuantityTableColumn" prefWidth="93.0" text="Ilość" />
+                              <TableColumn fx:id="cartNameTableColumn" prefWidth="241.0" text="Nazwa" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="780.0" layoutY="30.0" text="Zamówienie">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="811.0" layoutY="392.0" mnemonicParsing="false" onAction="#putOrder" prefHeight="33.0" prefWidth="233.0" text="Zamów produkty">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="productQuantityTextField" layoutX="444.0" layoutY="122.0" prefHeight="24.0" prefWidth="54.0" />
+                        <Label fx:id="productNameLabel1" layoutX="388.0" layoutY="123.0" text="Ilość:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="ordersTab" text="Moje zamówienia">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="ordersTableView" layoutX="21.0" layoutY="14.0" onMouseClicked="#onSelectedOrder" prefHeight="603.0" prefWidth="260.0">
+                          <columns>
+                            <TableColumn fx:id="ordersIdTableColumn" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="ordersStatusTableColumn" prefWidth="198.0" text="Status" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="584.0" layoutY="14.0" text="Szczegóły zamówienia">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="474.0" layoutY="65.0" text="Do kupienia">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="865.0" layoutY="65.0" text="Do zwrotu">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="toBuyTableView" layoutX="428.0" layoutY="105.0" onMouseClicked="#onSelectedProductFromToBuy" prefHeight="251.0" prefWidth="237.0">
+                          <columns>
+                            <TableColumn fx:id="toBuyQuantityTableColumn" prefWidth="75.0" text="Ilość" />
+                            <TableColumn fx:id="toBuyNameTableColumn" prefWidth="161.0" text="Nazwa produktu" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="toReturnTableView" layoutX="793.0" layoutY="105.0" onMouseClicked="#onSelectedProductFromToReturn" prefHeight="251.0" prefWidth="237.0">
+                           <columns>
+                              <TableColumn fx:id="toReturnQuantityTableColumn" prefWidth="75.0" text="Ilość" />
+                              <TableColumn fx:id="toReturnNameTableColumn" prefWidth="161.0" text="Nazwa produktu" />
+                           </columns>
+                        </TableView>
+                        <Button layoutX="637.0" layoutY="456.0" mnemonicParsing="false" onAction="#acceptOrder" text="Przejdź do kasy">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="847.0" layoutY="373.0" mnemonicParsing="false" onAction="#returnOrder" text="Zwróć produkty">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="receiptsTab" text="Paragony">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="receiptsTableView" layoutX="27.0" layoutY="21.0" prefHeight="588.0" prefWidth="1131.0">
+                          <columns>
+                            <TableColumn fx:id="receiptsTableColumn" prefWidth="1075.0" text="Paragony" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <TextField fx:id="keeperHostTextField" layoutX="646.0" layoutY="86.0" />
+      <TextField fx:id="keeperPortTextField" layoutX="837.0" layoutY="86.0" prefHeight="24.0" prefWidth="84.0" />
+      <Label fx:id="listeningLabel1" layoutX="646.0" layoutY="34.0" text="Połącz się z magazynierem">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="646.0" layoutY="62.0" text="nazwa" />
+      <Label layoutX="837.0" layoutY="62.0" text="port" />
+      <Button layoutX="943.0" layoutY="86.0" mnemonicParsing="false" onAction="#registerToKeeper" text="Zarejestruj się" />
+      <Label layoutX="823.0" layoutY="83.0" text=":">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
