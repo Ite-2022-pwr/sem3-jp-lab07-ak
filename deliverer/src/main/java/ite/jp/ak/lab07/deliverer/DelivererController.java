@@ -14,6 +14,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class DelivererController {
@@ -46,9 +47,9 @@ public class DelivererController {
             Registry registry = LocateRegistry.getRegistry(port);
             IKeeper keeper = (IKeeper) registry.lookup(stubName);
 
-            IDeliverer iDeliverer = new DelivererImpl();
-            ((DelivererImpl) iDeliverer).setResponseHandler(this::responseHandler);
-            ((DelivererImpl) iDeliverer).setReturnOrderHandler(this::returnOrderHandler);
+            DelivererImpl iDeliverer = new DelivererImpl();
+            iDeliverer.setResponseHandler(this::responseHandler);
+            iDeliverer.setReturnOrderHandler(this::returnOrderHandler);
 
             deliverer.setDeliverer(iDeliverer);
             deliverer.setKeeper(keeper);
@@ -68,7 +69,7 @@ public class DelivererController {
         try {
             ((ICustomer) ic).putOrder(deliverer.getDeliverer(), itemList);
             Platform.runLater(() -> {
-                orderLabel.setText("Obsługiwanie zamówienia z produktami:\n" + itemList.toString());
+                orderLabel.setText("Obsługiwanie zamówienia z produktami:\n" + itemList.stream().map(Item::toString).collect(Collectors.joining("\n")));
             });
         } catch (RemoteException e) {
             throw new RuntimeException(e);

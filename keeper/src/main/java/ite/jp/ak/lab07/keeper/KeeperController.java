@@ -164,10 +164,10 @@ public class KeeperController {
             }
             var port = Integer.parseInt(portTextField.getText());
 
-            IKeeper newKeeper = new KeeperImpl();
-            ((KeeperImpl) newKeeper).setRegisterHandler(this::registerHandler);
-            ((KeeperImpl) newKeeper).setUnregisterHandler(this::unregisterHandler);
-            ((KeeperImpl) newKeeper).setPutOrderHandler(this::putOrderHandler);
+            KeeperImpl newKeeper = new KeeperImpl();
+            newKeeper.setRegisterHandler(this::registerHandler);
+            newKeeper.setUnregisterHandler(this::unregisterHandler);
+            newKeeper.setPutOrderHandler(this::putOrderHandler);
 
             Registry rmiRegistry = LocateRegistry.createRegistry(port);
             rmiRegistry.rebind(stubName, newKeeper);

@@ -164,10 +164,10 @@ public class CustomerController {
             Registry registry = LocateRegistry.getRegistry(port);
             IKeeper keeper = (IKeeper) registry.lookup(stubName);
 
-            ICustomer iCustomer = new CustomerImpl();
-            ((CustomerImpl) iCustomer).setResponseHandler(this::responseHandler);
-            ((CustomerImpl) iCustomer).setPutOrderHandler(this::putOrderHandler);
-            ((CustomerImpl) iCustomer).setReturnReceiptHandler(this::returnReceiptHandler);
+            CustomerImpl iCustomer = new CustomerImpl();
+            iCustomer.setResponseHandler(this::responseHandler);
+            iCustomer.setPutOrderHandler(this::putOrderHandler);
+            iCustomer.setReturnReceiptHandler(this::returnReceiptHandler);
             customer.setCustomer(iCustomer);
             customer.setKeeper(keeper);
             customer.setStubName(stubName);

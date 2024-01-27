@@ -40,8 +40,8 @@ public class SellerController {
             Registry registry = LocateRegistry.getRegistry(port);
             IKeeper keeper = (IKeeper) registry.lookup(stubName);
 
-            ISeller iSeller = new SellerImpl();
-            ((SellerImpl) iSeller).setKeeper(keeper);
+            SellerImpl iSeller = new SellerImpl();
+            iSeller.setKeeper(keeper);
 
             seller.setKeeper(keeper);
             seller.setRegistry(registry);
