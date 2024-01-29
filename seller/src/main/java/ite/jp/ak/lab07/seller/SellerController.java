@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import pl.edu.pwr.tkubik.jp.shop.api.IKeeper;
-import pl.edu.pwr.tkubik.jp.shop.api.ISeller;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -23,6 +22,7 @@ public class SellerController {
     public void initialize() {
         keeperHostTextField.setText("keeper");
         keeperPortTextField.setText("1099");
+        System.setProperty("java.rmi.server.hostname","192.168.7.218");
     }
 
 
@@ -37,7 +37,7 @@ public class SellerController {
             }
             var port = Integer.parseInt(keeperPortTextField.getText());
 
-            Registry registry = LocateRegistry.getRegistry(port);
+            Registry registry = LocateRegistry.getRegistry("192.168.7.253", port);
             IKeeper keeper = (IKeeper) registry.lookup(stubName);
 
             SellerImpl iSeller = new SellerImpl();

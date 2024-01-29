@@ -104,6 +104,8 @@ public class CustomerController {
 
         keeperHostTextField.setText("keeper");
         keeperPortTextField.setText("1099");
+
+        System.setProperty("java.rmi.server.hostname","192.168.7.218");
     }
 
     public void fillProductsTableView() {
@@ -161,7 +163,7 @@ public class CustomerController {
             }
             var port = Integer.parseInt(keeperPortTextField.getText());
 
-            Registry registry = LocateRegistry.getRegistry(port);
+            Registry registry = LocateRegistry.getRegistry("192.168.7.253", port);
             IKeeper keeper = (IKeeper) registry.lookup(stubName);
 
             CustomerImpl iCustomer = new CustomerImpl();

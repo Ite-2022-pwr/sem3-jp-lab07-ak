@@ -30,6 +30,7 @@ public class DelivererController {
     public void initialize() {
         keeperHostTextField.setText("keeper");
         keeperPortTextField.setText("1099");
+        System.setProperty("java.rmi.server.hostname","192.168.7.218");
     }
 
 
@@ -44,7 +45,7 @@ public class DelivererController {
             }
             var port = Integer.parseInt(keeperPortTextField.getText());
 
-            Registry registry = LocateRegistry.getRegistry(port);
+            Registry registry = LocateRegistry.getRegistry("192.168.7.110", port);
             IKeeper keeper = (IKeeper) registry.lookup(stubName);
 
             DelivererImpl iDeliverer = new DelivererImpl();
